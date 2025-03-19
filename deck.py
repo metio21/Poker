@@ -43,7 +43,7 @@ class Deck:
     def deal(self):
         return self._deck.pop(0)
 
-if name == "__main__"
+if __name__ == "__main__":
     deck = Deck()
     print(deck)
     deck.shuffle()
