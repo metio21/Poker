@@ -2,7 +2,7 @@ import random
 
 class Card:
     RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
-    SUITS = ["♠", "♥", "♦", "♣"]
+    SUITS = ["♣", "♦", "♥", "♠"]
     def __init__(self, suit, rank):
         if rank not in self.RANKS:
             raise ValueError("Invalid rank")
@@ -10,6 +10,12 @@ class Card:
             raise ValueError("Invalid suit")
         self._suit = suit
         self._rank = rank
+
+    def __eq__(self, other):
+        return self.rank == other.rank
+
+    def __gt__(self, other):
+        return self.RANKS.index(self.rank) > self.RANKS.index(other.rank)
 
     def __str__(self):
         return f"{self._rank}{self._suit}"
@@ -25,17 +31,15 @@ class Card:
     def rank(self):
         return self._rank
 
-
-
 class Deck:
-    def __init__ (self):
+    def __init__(self):
         self._deck = []
         for suit in Card.SUITS:
             for rank in Card.RANKS:
                 self._deck.append(Card(suit, rank))
 
-    def __str__ (self):
-            return str(self._deck)
+    def __str__(self):
+        return str(self._deck)
 
     def shuffle(self):
         random.shuffle(self._deck)
@@ -49,6 +53,3 @@ if __name__ == "__main__":
     deck.shuffle()
     print(deck)
     print(deck.deal())
-
-
-
